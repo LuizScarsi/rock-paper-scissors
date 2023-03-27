@@ -10,7 +10,7 @@
     <script>
         function game(){
             let playerChoice
-            for(let i; i<5; i++){
+            for(let i=0; i<5; i++){
                 playerChoice = prompt('Enter your choice (rock, paper, scissors)').toLowerCase()
                 playRound(playerChoice, getComputerChoice())
             }
@@ -19,11 +19,40 @@
         function getComputerChoice(){
             const choices = ['rock', 'paper', 'scissors']
             let computerChoice = choices[Math.floor(Math.random()*choices.length)]
+            console.log(`The computer choses ${computerChoice}`)
+            alert(`The computer choses ${computerChoice}`)
             return computerChoice
         }
 
         function playRound(playerSelection, computerSelection){
-
+            if (playerSelection==computerSelection){
+                console.log("It's a tie")
+                alert("It's a tie")
+            } else if (playerSelection=='rock'){
+                if (computerSelection=='paper'){
+                    console.log('You lose! Paper beats Rock')
+                    alert('You lose! Paper beats Rock')
+                } else {
+                    console.log('You win! Rock beats Scissors')
+                    alert('You win! Rock beats Scissors')
+                }
+            } else if (playerSelection=='paper'){
+                if (computerSelection=='rock'){
+                    console.log('You win! Paper beats Rock')
+                    alert('You win! Paper beats Rock')
+                } else {
+                    console.log('You lose! Scissors beats Paper')
+                    alert('You lose! Scissors beats Paper')
+                }
+            } else {
+                if (computerSelection=='rock'){
+                    console.log('You lose! Rock beats Scissors')
+                    alert('You lose! Rock beats Scissors')
+                } else {
+                    console.log('You win! Scissors beats Paper')
+                    alert('You win! Scissors beats Paper')
+                }
+            }
         }
         game()
     </script>
