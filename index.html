@@ -9,10 +9,29 @@
 <body>
     <script>
         function game(){
+            //plays a game of 5 rounds, registers points and tells who is the winner
             let playerChoice
+            let roundResult
+            let playerPoints = 0
+            let computerPoints = 0
             for(let i=0; i<5; i++){
                 playerChoice = prompt('Enter your choice (rock, paper, scissors)').toLowerCase()
-                playRound(playerChoice, getComputerChoice())
+                roundResult = playRound(playerChoice, getComputerChoice())
+                if (roundResult.includes('win')){
+                    console.log(roundResult)
+                    playerPoints++
+                    console.log(`Player: ${playerPoints}`)
+                    console.log(`Computer: ${computerPoints}`)
+                } else if (roundResult.includes('lose')){
+                    console.log(roundResult)
+                    computerPoints++
+                    console.log(`Player: ${playerPoints}`)
+                    console.log(`Computer: ${computerPoints}`)
+                } else {
+                    console.log(roundResult)
+                    console.log(`Player: ${playerPoints}`)
+                    console.log(`Computer: ${computerPoints}`)
+                }
             }
         }
 
@@ -25,26 +44,26 @@
 
         function playRound(playerSelection, computerSelection){
             if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors'){
-                console.log('Invalid choice, try again!')
+                return 'Invalid choice, try again!'
             } else if (playerSelection==computerSelection){
-                console.log("It's a tie")
+                return "It's a tie"
             } else if (playerSelection == 'rock'){
                 if (computerSelection == 'paper'){
-                    console.log('You lose! Paper beats Rock')
+                    return 'You lose! Paper beats Rock'
                 } else {
-                    console.log('You win! Rock beats Scissors')
+                    return 'You win! Rock beats Scissors'
                 }
             } else if (playerSelection == 'paper'){
                 if (computerSelection == 'rock'){
-                    console.log('You win! Paper beats Rock')
+                    return 'You win! Paper beats Rock'
                 } else {
-                    console.log('You lose! Scissors beats Paper')
+                    return 'You lose! Scissors beats Paper'
                 }
             } else if (playerSelection == 'scissors'){
                 if (computerSelection == 'rock'){
-                    console.log('You lose! Rock beats Scissors')
+                    return 'You lose! Rock beats Scissors'
                 } else {
-                    console.log('You win! Scissors beats Paper')
+                    return 'You win! Scissors beats Paper'
                 }
             }
         }
