@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Choose one:</h1>
+    <div class="buttons">
+        <img src="./img/rock-pexels-pixabay-161702.jpg" alt="rock">
+        <img src="./img/paper-pexels-steve-johnson-963048.jpg" alt="paper">
+        <img src="./img/scissor-pexels-jess-bailey-designs-755991.jpg" alt="scissors">
+    </div>
+    <div class="result"></div>
     <script>
         function game(){
-            //plays a game of 5 rounds, registers points and tells who is the winner
-            let playerChoice
             let roundResult
             let playerPoints = 0
             let computerPoints = 0
-            for(let i=0; i<5; i++){
-                playerChoice = prompt('Enter your choice (rock, paper, scissors)').toLowerCase()
+            
+            let playerChoices = document.querySelectorAll('img');
+            playerChoices.forEach(playerChoice => 
+                playerChoice.addEventListener('click', playRound));
                 roundResult = playRound(playerChoice, getComputerChoice())
                 if (roundResult.includes('win')){
                     console.log(roundResult)
@@ -33,7 +41,6 @@
                     console.log(`Computer: ${computerPoints}`)
                 }
             }
-        }
 
         function getComputerChoice(){
             const choices = ['rock', 'paper', 'scissors']
