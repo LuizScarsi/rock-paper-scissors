@@ -17,18 +17,22 @@
     <div class="result"></div>
     <script>
         function game(){
-            let roundResult
-            let playerPoints = 0
-            let computerPoints = 0
+            let roundResult;
+            let playerPoints = 0;
+            let computerPoints = 0;
             
-            let playerChoices = document.querySelectorAll('img');
-            playerChoices.forEach(playerChoice => 
-                playerChoice.addEventListener('click', playRound));
-                roundResult = playRound(playerChoice, getComputerChoice())
+            const playerChoices = document.querySelectorAll('img');
+            playerChoices.forEach(playerChoice => {
+                playerChoice.addEventListener('click', () => {
+                    roundResult = playRound(playerChoice.alt, getComputerChoice());
+                    computePoints(roundResult);
+                })
+            })
+            function computePoints(roundResult){
                 if (roundResult.includes('win')){
                     console.log(roundResult)
-                    playerPoints++
                     console.log(`Player: ${playerPoints}`)
+                    playerPoints++
                     console.log(`Computer: ${computerPoints}`)
                 } else if (roundResult.includes('lose')){
                     console.log(roundResult)
@@ -40,7 +44,8 @@
                     console.log(`Player: ${playerPoints}`)
                     console.log(`Computer: ${computerPoints}`)
                 }
-            }
+            } 
+        }
 
         function getComputerChoice(){
             const choices = ['rock', 'paper', 'scissors']
