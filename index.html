@@ -8,19 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Choose one:</h1>
+    <h1>Choose Rock, Paper or Scissors:</h1>
     <div class="buttons">
         <img src="./img/rock-pexels-pixabay-161702.jpg" alt="rock">
         <img src="./img/paper-pexels-steve-johnson-963048.jpg" alt="paper">
         <img src="./img/scissor-pexels-jess-bailey-designs-755991.jpg" alt="scissors">
     </div>
-    <div class="result"></div>
+    <div class="text-container">
+        <div class="computer-choice"></div>
+        <div class="result"></div>
+        <div class="points"></div>
+    </div>
     <script>
         function game(){
             let roundResult;
             let playerPoints = 0;
             let computerPoints = 0;
-            
+
+            const points = document.querySelector('.points');
+            const result = document.querySelector('.result');
             const playerChoices = document.querySelectorAll('img');
             playerChoices.forEach(playerChoice => {
                 playerChoice.addEventListener('click', () => {
@@ -30,29 +36,30 @@
             })
             function computePoints(roundResult){
                 if (roundResult.includes('win')){
-                    console.log(roundResult)
-                    console.log(`Player: ${playerPoints}`)
-                    playerPoints++
-                    console.log(`Computer: ${computerPoints}`)
+                    playerPoints++;
+                    result.textContent = `${roundResult}`;
+                    points.textContent = `Player: ${playerPoints},
+                    Computer: ${computerPoints}`;
                 } else if (roundResult.includes('lose')){
-                    console.log(roundResult)
-                    computerPoints++
-                    console.log(`Player: ${playerPoints}`)
-                    console.log(`Computer: ${computerPoints}`)
+                    computerPoints++;
+                    result.textContent = `${roundResult}`;
+                    points.textContent = `Player: ${playerPoints},
+                    Computer: ${computerPoints}`;
                 } else {
-                    console.log(roundResult)
-                    console.log(`Player: ${playerPoints}`)
-                    console.log(`Computer: ${computerPoints}`)
+                    result.textContent = `${roundResult}`;
+                    points.textContent = `Player: ${playerPoints},
+                    Computer: ${computerPoints}`;
                 }
             } 
         }
 
         function getComputerChoice(){
-            const choices = ['rock', 'paper', 'scissors']
-            let computerChoice = choices[Math.floor(Math.random()*choices.length)]
-            console.log(`The computer choses ${computerChoice}`)
-            return computerChoice
-        }
+            const showChoice = document.querySelector('.computer-choice');
+            const choices = ['Rock', 'Paper', 'Scissors'];
+            let computerChoice = choices[Math.floor(Math.random()*choices.length)];
+            showChoice.textContent = `The computer choses ${computerChoice}`;
+            return computerChoice;
+        };
 
         function playRound(playerSelection, computerSelection){
             if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors'){
