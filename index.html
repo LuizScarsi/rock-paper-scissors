@@ -18,6 +18,7 @@
         <div class="computer-choice"></div>
         <div class="result"></div>
         <div class="points"></div>
+        <div class="winner"></div>
     </div>
     <script>
         function game(){
@@ -27,6 +28,7 @@
 
             const points = document.querySelector('.points');
             const result = document.querySelector('.result');
+            const winner = document.querySelector('.winner');
             const playerChoices = document.querySelectorAll('img');
             playerChoices.forEach(playerChoice => {
                 playerChoice.addEventListener('click', () => {
@@ -50,12 +52,26 @@
                     points.textContent = `Player: ${playerPoints},
                     Computer: ${computerPoints}`;
                 }
-            } 
+                checkWinner();
+            }
+            function checkWinner(){
+                winner.textContent = ''
+                if (playerPoints === 5){
+                    winner.textContent = 'You win!'
+                    playerPoints = 0;
+                    computerPoints = 0;
+                }
+                if (computerPoints === 5){
+                    winner.textContent = 'You lose!'
+                    playerPoints = 0;
+                    computerPoints = 0;
+                }
+            }
         }
 
         function getComputerChoice(){
             const showChoice = document.querySelector('.computer-choice');
-            const choices = ['Rock', 'Paper', 'Scissors'];
+            const choices = ['rock', 'paper', 'scissors'];
             let computerChoice = choices[Math.floor(Math.random()*choices.length)];
             showChoice.textContent = `The computer choses ${computerChoice}`;
             return computerChoice;
